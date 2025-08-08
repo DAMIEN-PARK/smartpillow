@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회사 소개 - SOMNIVERSE</title>
+    <meta name="description" content="SOMNIVERSE의 비전과 미션을 소개합니다.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(to right, #60a5fa, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        :root {
+            --foreground-rgb: 255, 255, 255;
+            --background-start-rgb: 0, 0, 0;
+            --background-end-rgb: 0, 0, 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: rgb(var(--foreground-rgb));
+            background: linear-gradient(
+                to bottom,
+                rgb(var(--background-start-rgb)),
+                rgb(var(--background-end-rgb))
+            );
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+                Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        }
+        
+        /* 스크롤바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(31, 41, 55, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(79, 70, 229, 0.7);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8);
+        }
+        
+        .history-item {
+            position: relative;
+        }
+        
+        .history-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 24px;
+            width: 2px;
+            background: rgba(79, 70, 229, 0.5);
+            z-index: 0;
+        }
+        
+        .history-item:first-child::before {
+            top: 24px;
+        }
+        
+        .history-item:last-child::before {
+            bottom: calc(100% - 24px);
+        }
+        
+        .value-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-placeholder {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(139, 92, 246, 0.2));
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-black text-white antialiased min-h-screen">
+    <!-- 네비게이션 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="text-xl font-bold text-white">SOMNIVERSE</a>
+                <div class="flex items-center">
+                    <div class="hidden md:flex space-x-8 mr-8">
+                        <a href="../company/index.html" class="text-white font-semibold transition-colors">회사 소개</a>
+                        <a href="../products/index.html" class="text-gray-300 hover:text-white transition-colors">제품 소개</a>
+                        <a href="../research/index.html" class="text-gray-300 hover:text-white transition-colors">연구 & 개발</a>
+                        <a href="../metaverse/index.html" class="text-gray-300 hover:text-white transition-colors">메타버스</a>
+                        <a href="../광고/index.html" class="text-gray-300 hover:text-white transition-colors">광고</a>
+                        <a href="../qna/index.html" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="../login/index.html" class="px-4 py-2 text-gray-300 hover:text-white border border-gray-600 rounded-full text-sm transition-colors">로그인</a>
+                        <a href="#" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition-colors">회원가입</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- 헤더 섹션 -->
+        <section class="py-16 bg-gradient-to-b from-blue-900 to-black">
+            <div class="container mx-auto px-4 text-center">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold mb-4 text-gradient">솜니버스 (SOMNIVERSE)</h2>
+                    <p class="text-xl text-gray-400">꿈과 우주의 조화</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+                    <div class="fade-in delay-100">
+                        <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                            SOMNIVERSE는 'SOMNIUM(꿈)'과 'UNIVERSE(우주)'의 결합으로 탄생한 이름입니다.
+                        </p>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                            SOMNIUM은 라틴어로 '꿈'을 의미하며, 인간의 무한한 상상력과 잠재력을 상징합니다. UNIVERSE는 무한한 가능성이 존재하는 우주를 의미합니다.
+                        </p>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            SOMNIVERSE는 이 두 개념의 조화를 통해 꿈처럼 자유롭고 무한한 가능성이 있는 새로운 세계를 구현하고자 합니다. 우리는 꿈이 가진 무한한 상상력과 우주의 무한한 가능성을 융합하여, 현실과 가상의 경계를 넘나드는 새로운 경험의 세계를 창조합니다.
+                        </p>
+                    </div>
+                    <div class="image-placeholder">
+                        <img src="../img/company.png" alt="SOMNIVERSE 회사 이미지" class="w-full h-full object-contain p-4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 회사 소개 섹션 -->
+        <section class="py-12 bg-black">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <!-- 미션 & 비전 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8">
+                            <h2 class="text-3xl font-bold mb-6 text-gradient">미션 (Mission)</h2>
+                            <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                                SOMNIVERSE는 혁신적인 AI 기술을 통해 모든 사람이 최적의 수면을 경험하고, 이를 통해 더 건강하고 생산적인 삶을 영위할 수 있도록 지원합니다. 우리는 수면의 질을 높임으로써 개인의 웰빙과 사회적 가치 창출에 기여합니다.
+                            </p>
+                        </div>
+                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8">
+                            <h2 class="text-3xl font-bold mb-6 text-gradient">비전 (Vision)</h2>
+                            <p class="text-lg text-gray-300 leading-relaxed">
+                                "2030년까지 SOMNIVERSE는 글로벌 슬립테크 시장을 선도하는 기업으로 성장하여, 전 세계 10억 명의 수면 건강을 개선하고 연간 의료비용 절감과 사회적 생산성 향상에 기여하는 종합 수면 관리 플랫폼이 되겠습니다. 우리는 수면 건강의 혁신을 통해 더 나은 미래를 만들어 갑니다."
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 핵심 가치 -->
+                    <div class="mb-20">
+                        <h2 class="text-3xl font-bold mb-10 text-center">가치 (Core Values)</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div class="value-card bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                <h3 class="text-xl font-bold mb-4">혁신성(Innovation)</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    최신의 AI와 IoT 기술을 활용하여 수면 관리 분야에 지속적인 혁신을 추구합니다. 기존 방식을 넘어서는 창의적 접근으로 수면 건강의 새로운 패러다임을 제시합니다.
+                                </p>
+                            </div>
+                            <div class="value-card bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                <h3 class="text-xl font-bold mb-4">맞춤형(Personalization)</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    모든 개인의 수면 패턴은 고유합니다. 정교한 AI 분석을 통해 사용자별 최적화된 수면 솔루션을 제공하여 개인 맞춤형 수면 건강을 실현합니다.
+                                </p>
+                            </div>
+                            <div class="value-card bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                <h3 class="text-xl font-bold mb-4">포용성(Inclusivity)</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    청각장애인을 포함한 모든 사용자가 차별 없이 사용할 수 있는 제품을 개발합니다. 수면 건강은 모든 사람의 권리이며, 우리의 기술은 이를 실현하기 위한 도구입니다.
+                                </p>
+                            </div>
+                            <div class="value-card bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                <h3 class="text-xl font-bold mb-4">정확성 (Precision)</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    과학적 근거와 데이터에 기반한 정확한 수면 분석을 제공합니다. 의학적 신뢰성을 바탕으로 사용자의 건강한 결정을 지원합니다.
+                                </p>
+                            </div>
+                            <div class="value-card bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                <h3 class="text-xl font-bold mb-4">지속가능성 (Sustainability)</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    환경과 사회를 고려한 제품 설계와 비즈니스 모델을 추구합니다. 재활용 가능한 소재 활용과 모듈형 설계로 지구 환경 보호에 기여합니다.
+                                </p>
+                            </div>
+                            <div class="value-card bg-gray-800 bg-opacity-50 rounded-xl p-6 flex items-center justify-center">
+                                <div class="image-placeholder w-full h-full">
+                                    <div class="text-gray-400 text-center">
+                                        <div class="text-3xl mb-3">🌐</div>
+                                        <p>회사 가치 이미지</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 회사 연혁 -->
+                    <div class="mb-20">
+                        <h2 class="text-3xl font-bold mb-10 text-center">회사 연혁</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div>
+                                <div class="space-y-12">
+                                    <div class="history-item pl-16 relative">
+                                        <div class="absolute left-0 top-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center z-10">
+                                            <span class="font-bold">2020</span>
+                                        </div>
+                                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                            <p class="text-gray-300">SOMNIVERSE 설립, 초기 R&D 팀 구성</p>
+                                        </div>
+                                    </div>
+                                    <div class="history-item pl-16 relative">
+                                        <div class="absolute left-0 top-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center z-10">
+                                            <span class="font-bold">2021</span>
+                                        </div>
+                                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                            <p class="text-gray-300">수면 데이터 분석 알고리즘 개발 및 특허 출원</p>
+                                        </div>
+                                    </div>
+                                    <div class="history-item pl-16 relative">
+                                        <div class="absolute left-0 top-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center z-10">
+                                            <span class="font-bold">2022</span>
+                                        </div>
+                                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                            <p class="text-gray-300">프로토타입 개발 및 베타 테스트 진행</p>
+                                        </div>
+                                    </div>
+                                    <div class="history-item pl-16 relative">
+                                        <div class="absolute left-0 top-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center z-10">
+                                            <span class="font-bold">2023</span>
+                                        </div>
+                                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                            <p class="text-gray-300">시리즈 A 투자 유치 및 메타버스 플랫폼 런칭</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="image-placeholder">
+                                <div class="text-gray-400 text-center">
+                                    <div class="text-5xl mb-3">🚀</div>
+                                    <p>회사 연혁 이미지</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA 섹션 -->
+                    <div class="mt-16 text-center">
+                        <a href="../products/index.html" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-lg font-semibold inline-block hover:opacity-90 transition-opacity">
+                            제품 알아보기
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black text-gray-400 py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">SOMNIVERSE</h3>
+                    <p class="text-sm">AI 기반 스마트 수면 혁신</p>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="../company/index.html" class="hover:text-white transition-colors">회사 소개</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">제품</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../products/index.html" class="hover:text-white transition-colors">스마트 베개</a></li>
+                        <li><a href="../index.html#research" class="hover:text-white transition-colors">연구 & 개발</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">체험</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">MVP 체험</a></li>
+                        <li><a href="../metaverse/index.html" class="hover:text-white transition-colors">메타버스</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">고객지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../광고/index.html" class="hover:text-white transition-colors">광고</a></li>
+                        <li><a href="../qna/index.html" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+                © 2024 SOMNIVERSE. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 스크롤 애니메이션
+        document.addEventListener('DOMContentLoaded', () => {
+            const valueCards = document.querySelectorAll('.value-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            valueCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+
+    <script src="../chatbot.js"></script>
+</body>
+</html> 

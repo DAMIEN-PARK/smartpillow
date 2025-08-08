@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOMNIVERSE - 새로운 메타버스의 시작</title>
+    <meta name="description" content="SOMNIVERSE는 새로운 디지털 경험의 시작입니다.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(to bottom, #111827, #000000);
+        }
+        
+        .scroll-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .scroll-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        :root {
+            --foreground-rgb: 255, 255, 255;
+            --background-start-rgb: 0, 0, 0;
+            --background-end-rgb: 0, 0, 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: rgb(var(--foreground-rgb));
+            background: linear-gradient(
+                to bottom,
+                rgb(var(--background-start-rgb)),
+                rgb(var(--background-end-rgb))
+            );
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+                Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        /* 스크롤바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(31, 41, 55, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(79, 70, 229, 0.7);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #60a5fa, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-black text-white antialiased min-h-screen">
+    <!-- 3D 배경 -->
+    <div id="canvas-container"></div>
+
+    <!-- 네비게이션 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="text-xl font-bold text-white">
+                    <a href="index.html" class="hover:text-blue-400 transition-colors">SOMNIVERSE</a>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:flex space-x-8 mr-8">
+                        <a href="company/index.html" class="text-gray-300 hover:text-white transition-colors">회사 소개</a>
+                        <a href="products/index.html" class="text-gray-300 hover:text-white transition-colors">제품 소개</a>
+                        <a href="research/index.html" class="text-gray-300 hover:text-white transition-colors">연구 & 개발</a>
+                        <a href="metaverse/index.html" class="text-gray-300 hover:text-white transition-colors">메타버스</a>
+                        <a href="광고/index.html" class="text-gray-300 hover:text-white transition-colors">광고</a>
+                        <a href="qna/index.html" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="login/index.html" class="px-4 py-2 text-gray-300 hover:text-white border border-gray-600 rounded-full text-sm transition-colors">로그인</a>
+                        <a href="signup/index.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition-colors">회원가입</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 히어로 섹션 -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-10"></div>
+            </div>
+            
+            <div class="container mx-auto px-4 z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-left fade-in">
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6 text-gradient">
+                            당신이 주무실때<br>
+                            AI가 깨어있겠습니다
+                        </h1>
+                        <p class="text-xl md:text-2xl text-gray-300 mb-8">
+                            수면이 데이터가 되다
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="./products/index.html" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-full text-lg font-semibold transition-colors flex items-center justify-center">
+                                <span class="mr-2">📖</span> 제품 알아보기
+                            </a>
+                            <a href="./research/index.html" class="px-8 py-4 bg-purple-600 hover:bg-purple-700 rounded-full text-lg font-semibold transition-colors flex items-center justify-center">
+                                <span class="mr-2">🔬</span> 연구 내용 보기
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="relative h-96 fade-in delay-200">
+                        <div class="relative w-full h-full">
+                            <div class="absolute inset-0 bg-blue-500 bg-opacity-20 rounded-xl backdrop-filter backdrop-blur-sm overflow-hidden">
+                                <video 
+                                    class="w-full h-full object-cover"
+                                    autoplay 
+                                    loop 
+                                    muted 
+                                    playsinline
+                                >
+                                    <source src="mov/main.mp4" type="video/mp4">
+                                    브라우저가 비디오를 지원하지 않습니다.
+                                </video>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                                <div class="text-center">
+                                    <h3 class="text-2xl font-bold mb-2 text-white">스마트 베개</h3>
+                                    <p class="text-gray-200">AI 기반 수면 분석 및 최적화</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 회사 소개 섹션 -->
+        <section id="company" class="py-20 bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold mb-4 text-gradient">솜니버스 (SOMNIVERSE)</h2>
+                    <p class="text-xl text-gray-400">꿈과 우주의 조화</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+                    <div class="fade-in delay-100">
+                        <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                            솜니버스(SOMNIVERSE)는 'SOMNIUM(꿈)'과 'UNIVERSE(우주)'의 결합으로 탄생한 이름입니다.
+                        </p>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                            SOMNIUM은 라틴어로 '꿈'을 의미하며, 인간의 무한한 상상력과 잠재력을 상징합니다. UNIVERSE는 무한한 가능성이 존재하는 우주를 의미합니다.
+                        </p>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            솜니버스는 이 두 개념의 조화를 통해 꿈처럼 자유롭고 무한한 가능성이 있는 새로운 세계를 구현하고자 합니다. 우리는 꿈이 가진 무한한 상상력과 우주의 무한한 가능성을 융합하여, 현실과 가상의 경계를 넘나드는 새로운 경험의 세계를 창조합니다.
+                        </p>
+                    </div>
+                    
+                    <div class="relative h-96 fade-in delay-200">
+                        <div class="relative w-full h-full">
+                            <div class="absolute inset-0 bg-blue-500 bg-opacity-20 rounded-xl backdrop-filter backdrop-blur-sm overflow-hidden">
+                                <img 
+                                    src="img/lab.jpg" 
+                                    alt="SOMNIVERSE 연구실" 
+                                    class="w-full h-full object-cover rounded-xl"
+                                >
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-xl">
+                                <div class="text-center">
+                                    <h3 class="text-2xl font-bold mb-2 text-white">SOMNIVERSE 연구실</h3>
+                                    <p class="text-gray-200">혁신적인 수면 기술 연구 현장</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 미션 & 비전 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8 fade-in delay-100">
+                        <h2 class="text-3xl font-bold mb-6 text-gradient">미션 (Mission)</h2>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            "SOMNIVERSE는 혁신적인 AI 기술을 통해 모든 사람이 최적의 수면을 경험하고, 이를 통해 더 건강하고 생산적인 삶을 영위할 수 있도록 지원합니다."
+                        </p>
+                    </div>
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8 fade-in delay-200">
+                        <h2 class="text-3xl font-bold mb-6 text-gradient">비전 (Vision)</h2>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            "2030년까지 SOMNIVERSE는 글로벌 슬립테크 시장을 선도하는 기업으로 성장하여, 전 세계 10억 명의 수면 건강을 개선하고 연간 의료비용 절감과 사회적 생산성 향상에 기여하는 종합 수면 관리 플랫폼이 되겠습니다."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 핵심 가치 -->
+                <div class="mb-20">
+                    <h2 class="text-3xl font-bold mb-10 text-center text-gradient">가치 (Core Values)</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="value-card bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-100">
+                            <h3 class="text-xl font-bold mb-4">혁신성(Innovation)</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                최신의 AI와 IoT 기술을 활용하여 수면 관리 분야에 지속적인 혁신을 추구합니다.
+                            </p>
+                        </div>
+                        <div class="value-card bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-200">
+                            <h3 class="text-xl font-bold mb-4">맞춤형(Personalization)</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                모든 개인의 수면 패턴은 고유합니다. 정교한 AI 분석을 통해 사용자별 최적화된 수면 솔루션을 제공합니다.
+                            </p>
+                        </div>
+                        <div class="value-card bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-300">
+                            <h3 class="text-xl font-bold mb-4">포용성(Inclusivity)</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                청각장애인을 포함한 모든 사용자가 차별 없이 사용할 수 있는 제품을 개발합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 회사 연혁 -->
+                <div class="mb-20">
+                    <h2 class="text-3xl font-bold mb-10 text-center text-gradient">회사 연혁</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="space-y-12">
+                            <div class="history-item pl-16 relative fade-in delay-100">
+                                <div class="absolute left-0 top-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center z-10">
+                                    <span class="font-bold">2020</span>
+                                </div>
+                                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                    <p class="text-gray-300">SOMNIVERSE 설립, 초기 R&D 팀 구성</p>
+                                </div>
+                            </div>
+                            <div class="history-item pl-16 relative fade-in delay-200">
+                                <div class="absolute left-0 top-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center z-10">
+                                    <span class="font-bold">2021</span>
+                                </div>
+                                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                    <p class="text-gray-300">수면 데이터 분석 알고리즘 개발 및 특허 출원</p>
+                                </div>
+                            </div>
+                            <div class="history-item pl-16 relative fade-in delay-300">
+                                <div class="absolute left-0 top-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center z-10">
+                                    <span class="font-bold">2022</span>
+                                </div>
+                                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                    <p class="text-gray-300">프로토타입 개발 및 베타 테스트 진행</p>
+                                </div>
+                            </div>
+                            <div class="history-item pl-16 relative fade-in delay-400">
+                                <div class="absolute left-0 top-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center z-10">
+                                    <span class="font-bold">2023</span>
+                                </div>
+                                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6">
+                                    <p class="text-gray-300">시리즈 A 투자 유치 및 메타버스 플랫폼 런칭</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 기능 소개 섹션 -->
+        <section id="features" class="py-20 bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold mb-4">주요 기능</h2>
+                    <p class="text-xl text-gray-400">SOMNIVERSE의 혁신적인 기술을 소개합니다</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 hover:bg-gray-800 hover:bg-opacity-80 transition-colors fade-in delay-100">
+                        <div class="text-4xl mb-4">🧠</div>
+                        <h3 class="text-xl font-bold mb-2">AI 수면 분석</h3>
+                        <p class="text-gray-400">AI 알고리즘을 통해 수면 패턴을 분석하고 최적화 방안을 제시합니다.</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 hover:bg-gray-800 hover:bg-opacity-80 transition-colors fade-in delay-200">
+                        <div class="text-4xl mb-4">🌡️</div>
+                        <h3 class="text-xl font-bold mb-2">온도 조절 기능</h3>
+                        <p class="text-gray-400">사용자의 체온과 선호도에 맞게 베개 온도를 자동으로 조절합니다.</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 hover:bg-gray-800 hover:bg-opacity-80 transition-colors fade-in delay-300">
+                        <div class="text-4xl mb-4">🎵</div>
+                        <h3 class="text-xl font-bold mb-2">맞춤형 사운드</h3>
+                        <p class="text-gray-400">개인화된 수면 유도 사운드로 더 빠르고 깊은 수면을 경험하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 메타버스 체험 섹션 -->
+        <section id="metaverse" class="py-20 bg-gradient-to-b from-gray-900 to-black">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="text-left fade-in">
+                        <h2 class="text-4xl font-bold mb-6">메타버스 체험</h2>
+                        <p class="text-xl text-gray-300 mb-6">
+                            가상 공간에서 SOMNIVERSE의 스마트 베개를 미리 경험해보세요. 3D로 구현된 수면 환경에서 다양한 기능을 체험할 수 있습니다.
+                        </p>
+                        <a href="#" class="px-8 py-4 bg-purple-600 hover:bg-purple-700 rounded-full text-lg font-semibold transition-colors inline-flex items-center">
+                            <span class="mr-2">🌐</span> 메타버스 입장하기
+                        </a>
+                    </div>
+                    
+                    <div class="relative h-80 rounded-xl overflow-hidden fade-in delay-200">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-30 z-10"></div>
+                        <div class="absolute inset-0 flex items-center justify-center z-20">
+                            <div class="bg-black bg-opacity-50 rounded-full p-4">
+                                <div class="text-6xl">🌙</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 연구 및 개발 섹션 -->
+        <section id="research" class="py-20 bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold mb-4">연구 & 개발</h2>
+                    <p class="text-xl text-gray-400">최신 기술과 연구로 더 나은 수면을 제공합니다</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8 fade-in delay-100">
+                        <h3 class="text-2xl font-bold mb-4">수면 데이터 분석</h3>
+                        <p class="text-gray-300 mb-4">
+                            수천 명의 수면 데이터를 분석하여 최적의 수면 환경을 연구합니다.
+                        </p>
+                        <a href="./research/index.html" class="text-blue-400 hover:text-blue-300 inline-flex items-center">
+                            자세히 보기 <span class="ml-2">→</span>
+                        </a>
+                    </div>
+                    
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8 fade-in delay-200">
+                        <h3 class="text-2xl font-bold mb-4">AI 알고리즘 개발</h3>
+                        <p class="text-gray-300 mb-4">
+                            개인화된 수면 솔루션을 제공하기 위한 AI 알고리즘을 지속적으로 개발합니다.
+                        </p>
+                        <a href="./research/index.html" class="text-purple-400 hover:text-purple-300 inline-flex items-center">
+                            자세히 보기 <span class="ml-2">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA 섹션 -->
+        <section class="py-20 bg-gradient-to-b from-gray-900 to-black">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center fade-in">
+                    <h2 class="text-4xl font-bold mb-6">더 나은 수면을 경험하세요</h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        SOMNIVERSE와 함께 수면의 질을 높이고 더 건강한 삶을 시작하세요.
+                    </p>
+                    <a href="#" class="px-10 py-5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-xl font-bold transition-transform hover:scale-105 inline-block">
+                        지금 시작하기
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ 섹션 -->
+        <section id="faq" class="py-20 bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold mb-4">자주 묻는 질문</h2>
+                    <p class="text-xl text-gray-400">고객님들이 가장 많이 문의하시는 내용입니다</p>
+                </div>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="space-y-6">
+                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-100">
+                            <h3 class="text-xl font-bold mb-3">스마트 베개는 어떤 원리로 작동하나요?</h3>
+                            <p class="text-gray-300">
+                                내장된 센서가 수면 중 움직임, 호흡, 체온 등을 감지하여 데이터를 수집하고, AI 알고리즘이 이를 분석하여 최적의 수면 환경을 조성합니다. 베개 내부의 모듈이 온도, 높이, 경도 등을 자동으로 조절합니다.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-200">
+                            <h3 class="text-xl font-bold mb-3">배터리는 얼마나 지속되나요?</h3>
+                            <p class="text-gray-300">
+                                완전 충전 시 일반적인 사용 환경에서 약 7일간 지속됩니다. 충전은 USB-C 타입으로 2시간 이내에 완료됩니다.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-300">
+                            <h3 class="text-xl font-bold mb-3">수면 데이터는 어떻게 확인할 수 있나요?</h3>
+                            <p class="text-gray-300">
+                                SOMNIVERSE 모바일 앱을 통해 수면 패턴, 수면 질, 개선 방안 등 다양한 데이터를 시각적으로 확인할 수 있습니다. 또한 주간, 월간 리포트를 통해 수면 패턴의 변화도 추적할 수 있습니다.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-400">
+                            <h3 class="text-xl font-bold mb-3">세탁이 가능한가요?</h3>
+                            <p class="text-gray-300">
+                                전자 모듈은 분리 가능하며, 베개 커버는 세탁기에서 세탁할 수 있습니다. 자세한 세탁 방법은 제품과 함께 제공되는 사용 설명서를 참고해 주세요.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 text-center fade-in">
+                        <a href="./qna/index.html" class="text-purple-400 hover:text-purple-300 inline-flex items-center text-lg">
+                            더 많은 질문 보기 <span class="ml-2">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black text-gray-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">SOMNIVERSE</h3>
+                    <p class="text-sm">AI 기반 스마트 수면 혁신</p>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="./company/index.html" class="hover:text-white transition-colors">회사 소개</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">제품</h4>
+                    <ul class="space-y-2">
+                        <li><a href="./products/index.html" class="hover:text-white transition-colors">스마트 베개</a></li>
+                        <li><a href="./research/index.html" class="hover:text-white transition-colors">연구 & 개발</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">체험</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">MVP 체험</a></li>
+                        <li><a href="#metaverse" class="hover:text-white transition-colors">메타버스</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">고객지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="./광고/index.html" class="hover:text-white transition-colors">광고</a></li>
+                        <li><a href="./qna/index.html" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+                © 2024 SOMNIVERSE. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 간단한 애니메이션 효과를 위한 스크립트
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            // 페이지 로드 시 애니메이션 활성화
+            fadeElements.forEach(element => {
+                element.style.opacity = '0';
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                }, 100);
+            });
+            
+            // 스크롤 시 요소 애니메이션
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Three.js 배경
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // 배경 파티클 생성
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 5000;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 5;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: '#3b82f6'
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        camera.position.z = 2;
+
+        // 애니메이션
+        function animate() {
+            requestAnimationFrame(animate);
+            particlesMesh.rotation.y += 0.001;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // 반응형 처리
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+
+    <script src="chatbot.js"></script>
+</body>
+</html> 

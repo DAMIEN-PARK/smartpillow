@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연구 & 개발 - SOMNIVERSE</title>
+    <meta name="description" content="SOMNIVERSE의 혁신적인 연구와 개발 활동을 소개합니다.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .research-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        .data-visualization {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            border-radius: 0.5rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="text-xl font-bold text-white">
+                    <a href="../index.html" class="hover:text-blue-400 transition-colors">SOMNIVERSE</a>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:flex space-x-8 mr-8">
+                        <a href="../company/index.html" class="text-gray-300 hover:text-white transition-colors">회사 소개</a>
+                        <a href="../products/index.html" class="text-gray-300 hover:text-white transition-colors">제품 소개</a>
+                        <a href="index.html" class="text-white">연구 & 개발</a>
+                        <a href="../metaverse/index.html" class="text-gray-300 hover:text-white transition-colors">메타버스</a>
+                        <a href="../광고/index.html" class="text-gray-300 hover:text-white transition-colors">광고</a>
+                        <a href="../qna/index.html" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="../login/index.html" class="px-4 py-2 text-gray-300 hover:text-white border border-gray-600 rounded-full text-sm transition-colors">로그인</a>
+                        <a href="../signup/index.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition-colors">회원가입</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 연구 & 개발 섹션 -->
+    <section class="pt-32 pb-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl font-bold mb-4 text-gradient">SOMNIVERSE 연구소</h1>
+                <p class="text-xl text-gray-400">꿈과 우주의 조화를 위한 혁신적인 연구</p>
+            </div>
+            
+            <!-- 주요 연구 분야 -->
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold text-center mb-12">주요 연구 분야</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <div class="text-2xl font-bold mb-4">AI 수면 분석</div>
+                        <p class="text-gray-400">
+                            딥러닝 기반 수면 패턴 분석 기술 개발 및 개인 맞춤형 수면 솔루션 연구
+                        </p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <div class="text-2xl font-bold mb-4">IoT 센서 기술</div>
+                        <p class="text-gray-400">
+                            정밀한 생체 신호 측정을 위한 초소형 센서 개발 및 데이터 수집 시스템 연구
+                        </p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <div class="text-2xl font-bold mb-4">메타버스 연계</div>
+                        <p class="text-gray-400">
+                            VR 기반 수면 환경 최적화 및 소셜 기능 통합 연구
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 수면 데이터 분석 섹션 (새로 추가) -->
+            <div class="mb-20" id="sleep-data-analysis">
+                <h2 class="text-3xl font-bold text-center mb-12">수면 데이터 분석</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <div class="data-visualization">
+                            <div class="text-center text-gray-400">
+                                <div class="text-3xl mb-2">📊</div>
+                                <p>수면 패턴 시각화</p>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">빅데이터 기반 수면 패턴 분석</h3>
+                        <p class="text-gray-400 mb-4">
+                            SomnusX는 100만 시간 이상의 수면 데이터를 분석하여 다양한 연령대와 생활 패턴에 따른 수면 특성을 파악합니다. 이 빅데이터는 개인별 맞춤형 수면 솔루션의 기초가 됩니다.
+                        </p>
+                        <ul class="text-gray-400 space-y-2 list-disc pl-5">
+                            <li>수면 단계별 뇌파 및 생체 신호 분석</li>
+                            <li>연령별, 성별 수면 패턴 비교 연구</li>
+                            <li>수면 환경 요인(온도, 습도, 소음 등)과 수면 품질 상관관계 분석</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <div class="data-visualization">
+                            <div class="text-center text-gray-400">
+                                <div class="text-3xl mb-2">💤</div>
+                                <p>수면 단계 모니터링</p>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">실시간 수면 상태 모니터링</h3>
+                        <p class="text-gray-400 mb-4">
+                            초소형 센서와 AI 알고리즘을 활용하여 침습적이지 않은 방식으로 실시간 수면 단계를 분석합니다. REM, 깊은 수면, 얕은 수면 단계를 정확히 파악하여 최적의 수면 사이클을 유도합니다.
+                        </p>
+                        <ul class="text-gray-400 space-y-2 list-disc pl-5">
+                            <li>비침습적 센서를 통한 심박변이도(HRV) 분석</li>
+                            <li>미세 움직임 탐지 기술을 통한 수면 중 체동 분석</li>
+                            <li>호흡 패턴 모니터링 및 수면무호흡 감지</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg research-card">
+                    <h3 class="text-xl font-bold mb-4">주요 연구 성과</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <p class="font-semibold text-blue-400 mb-2">95%</p>
+                            <p class="text-gray-400">수면 단계 분석 정확도</p>
+                        </div>
+                        <div class="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <p class="font-semibold text-blue-400 mb-2">87%</p>
+                            <p class="text-gray-400">수면 품질 예측 정확도</p>
+                        </div>
+                        <div class="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <p class="font-semibold text-blue-400 mb-2">+23%</p>
+                            <p class="text-gray-400">맞춤형 솔루션 적용 후 깊은 수면 향상도</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI 알고리즘 개발 섹션 (새로 추가) -->
+            <div class="mb-20" id="ai-algorithm">
+                <h2 class="text-3xl font-bold text-center mb-12">AI 알고리즘 개발</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <h3 class="text-xl font-bold mb-4">딥러닝 기반 수면 최적화 알고리즘</h3>
+                        <p class="text-gray-400 mb-4">
+                            SomnusX의 핵심 기술인 딥러닝 기반 수면 최적화 알고리즘은 사용자의 수면 패턴을 학습하여 맞춤형 수면 환경을 제공합니다.
+                        </p>
+                        <div class="mb-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                            <p class="text-sm font-mono text-gray-300">
+                                <span class="text-blue-400">class</span> SleepOptimizer(nn.Module):<br>
+                                &nbsp;&nbsp;<span class="text-blue-400">def</span> __init__(self):<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;super(SleepOptimizer, self).__init__()<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;self.lstm = nn.LSTM(input_size=128, hidden_size=256)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;# 알고리즘 코드 예시
+                            </p>
+                        </div>
+                        <ul class="text-gray-400 space-y-2 list-disc pl-5">
+                            <li>LSTM 기반 시계열 수면 데이터 분석</li>
+                            <li>개인별 수면 패턴 학습 및 예측 모델</li>
+                            <li>강화학습을 통한 최적 수면 환경 도출</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <h3 class="text-xl font-bold mb-4">AI 기반 수면 문제 진단 시스템</h3>
+                        <p class="text-gray-400 mb-4">
+                            수집된 수면 데이터를 기반으로 수면 장애 가능성을 조기에 진단하고, 의료 전문가와의 연계를 통해 효과적인 관리 방안을 제시합니다.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="bg-gray-800 bg-opacity-50 p-3 rounded-lg">
+                                <p class="font-semibold mb-1">수면무호흡</p>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                                <p class="text-xs text-right mt-1 text-gray-400">92% 정확도</p>
+                            </div>
+                            <div class="bg-gray-800 bg-opacity-50 p-3 rounded-lg">
+                                <p class="font-semibold mb-1">불면증</p>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 89%"></div>
+                                </div>
+                                <p class="text-xs text-right mt-1 text-gray-400">89% 정확도</p>
+                            </div>
+                        </div>
+                        <ul class="text-gray-400 space-y-2 list-disc pl-5">
+                            <li>기계학습 기반 수면 장애 패턴 인식</li>
+                            <li>비정상적 수면 패턴 조기 감지 시스템</li>
+                            <li>건강 데이터 통합 분석 및 맞춤형 조언</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 연구 성과 -->
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold text-center mb-12">연구 성과</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <h3 class="text-xl font-bold mb-4">특허 등록</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center mr-3 mt-1">1</div>
+                                <div>
+                                    <p class="font-semibold">AI 기반 수면 패턴 분석 방법</p>
+                                    <p class="text-gray-400">수면 단계별 생체 신호 분석 및 최적화 알고리즘</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center mr-3 mt-1">2</div>
+                                <div>
+                                    <p class="font-semibold">스마트 온도 조절 시스템</p>
+                                    <p class="text-gray-400">개인 맞춤형 수면 온도 자동 조절 기술</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center mr-3 mt-1">3</div>
+                                <div>
+                                    <p class="font-semibold">VR 수면 환경 생성 방법</p>
+                                    <p class="text-gray-400">수면 최적화를 위한 가상 환경 생성 기술</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <h3 class="text-xl font-bold mb-4">논문 발표</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center mr-3 mt-1">1</div>
+                                <div>
+                                    <p class="font-semibold">딥러닝 기반 수면 품질 예측 모델</p>
+                                    <p class="text-gray-400">IEEE International Conference on AI</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center mr-3 mt-1">2</div>
+                                <div>
+                                    <p class="font-semibold">IoT 센서 네트워크 최적화</p>
+                                    <p class="text-gray-400">ACM Conference on IoT Systems</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center mr-3 mt-1">3</div>
+                                <div>
+                                    <p class="font-semibold">VR 기반 수면 환경 최적화</p>
+                                    <p class="text-gray-400">Virtual Reality Society Annual Meeting</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 연구 시설 -->
+            <div>
+                <h2 class="text-3xl font-bold text-center mb-12">연구 시설</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <div class="text-2xl font-bold mb-4">AI 연구소</div>
+                        <p class="text-gray-400">
+                            최신 AI 기술 연구 및 개발을 위한 첨단 연구소
+                        </p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <div class="text-2xl font-bold mb-4">수면 연구실</div>
+                        <p class="text-gray-400">
+                            수면 패턴 분석 및 최적화 연구를 위한 전문 연구실
+                        </p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg research-card">
+                        <div class="text-2xl font-bold mb-4">VR/AR 연구소</div>
+                        <p class="text-gray-400">
+                            가상 현실 기반 수면 환경 연구를 위한 연구소
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-black text-gray-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Somverse</h3>
+                    <p class="text-sm">AI 기반 스마트 수면 혁신</p>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">제품</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../products/index.html" class="hover:text-white transition-colors">스마트 베개</a></li>
+                        <li><a href="../research/index.html" class="hover:text-white transition-colors">연구 & 개발</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">회사</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../company/index.html" class="hover:text-white transition-colors">회사 소개</a></li>
+                        <li><a href="../metaverse/index.html" class="hover:text-white transition-colors">메타버스</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">고객지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../qna/index.html" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="../광고/index.html" class="hover:text-white transition-colors">광고</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+                © 2024 Somverse. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../chatbot.js"></script>
+</body>
+</html> 

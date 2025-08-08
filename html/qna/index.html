@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - SOMNIVERSE</title>
+    <meta name="description" content="SOMNIVERSE 제품과 서비스에 대한 자주 묻는 질문들을 확인하세요.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(to right, #60a5fa, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        :root {
+            --foreground-rgb: 255, 255, 255;
+            --background-start-rgb: 0, 0, 0;
+            --background-end-rgb: 0, 0, 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: rgb(var(--foreground-rgb));
+            background: linear-gradient(
+                to bottom,
+                rgb(var(--background-start-rgb)),
+                rgb(var(--background-end-rgb))
+            );
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+                Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        }
+        
+        /* 스크롤바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(31, 41, 55, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(79, 70, 229, 0.7);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8);
+        }
+        
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-toggle {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-black text-white antialiased min-h-screen">
+    <!-- 네비게이션 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="text-xl font-bold text-white">
+                    <a href="../index.html" class="hover:text-blue-400 transition-colors">SOMNIVERSE</a>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:flex space-x-8 mr-8">
+                        <a href="../company/index.html" class="text-gray-300 hover:text-white transition-colors">회사 소개</a>
+                        <a href="../products/index.html" class="text-gray-300 hover:text-white transition-colors">제품 소개</a>
+                        <a href="../research/index.html" class="text-gray-300 hover:text-white transition-colors">연구 & 개발</a>
+                        <a href="../metaverse/index.html" class="text-gray-300 hover:text-white transition-colors">메타버스</a>
+                        <a href="../광고/index.html" class="text-gray-300 hover:text-white transition-colors">광고</a>
+                        <a href="../qna/index.html" class="text-white font-semibold transition-colors">FAQ</a>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="../login/index.html" class="px-4 py-2 text-gray-300 hover:text-white border border-gray-600 rounded-full text-sm transition-colors">로그인</a>
+                        <a href="#" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition-colors">회원가입</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- 헤더 섹션 -->
+        <section class="py-16 bg-gradient-to-b from-purple-900 to-black">
+            <div class="container mx-auto px-4 text-center">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl font-bold mb-4 text-gradient">자주 묻는 질문</h1>
+                    <p class="text-xl text-gray-400">SOMNIVERSE 제품과 서비스에 대한 궁금증을 해결해드립니다</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ 카테고리 섹션 -->
+        <section class="py-12 bg-black">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <button class="category-btn active px-6 py-3 bg-purple-600 rounded-full text-white font-semibold" data-category="all">
+                        전체 보기
+                    </button>
+                    <button class="category-btn px-6 py-3 bg-gray-800 rounded-full text-gray-300 font-semibold" data-category="product">
+                        제품 관련
+                    </button>
+                    <button class="category-btn px-6 py-3 bg-gray-800 rounded-full text-gray-300 font-semibold" data-category="tech">
+                        기술 관련
+                    </button>
+                    <button class="category-btn px-6 py-3 bg-gray-800 rounded-full text-gray-300 font-semibold" data-category="purchase">
+                        구매 및 배송
+                    </button>
+                    <button class="category-btn px-6 py-3 bg-gray-800 rounded-full text-gray-300 font-semibold" data-category="after">
+                        A/S 및 관리
+                    </button>
+                    <button class="category-btn px-6 py-3 bg-gray-800 rounded-full text-gray-300 font-semibold" data-category="business">
+                        사업 관련
+                    </button>
+                </div>
+                
+                <div class="max-w-4xl mx-auto space-y-6" id="faq-list">
+                    <!-- 제품 관련 FAQ -->
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="product">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">SomnusX는 기존 베개 제품과 어떤 차별점이 있나요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX는 단순한 베개가 아닌 AI 기반 종합 수면 관리 플랫폼입니다. 실시간 수면 패턴 분석, 햅틱 진동 알람, 온열 자동 조절 기능이 모두 통합되어 있으며, 모바일 앱을 통한 장기적 수면 데이터 관리와 병원 연계 서비스를 제공합니다. 기존 제품 대비 30% 가벼운 무게와 25% 작은 부피로 설계되어 편안한 사용성을 보장합니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="product">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">햅틱 스마트 알람은 정말 효과적인가요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                네, 하버드 의대와 도호쿠 대학 연구에 따르면, 진동 기반 알람은 기상 시 스트레스를 최대 35% 감소시킵니다. 소리 알람과 달리 진동 알람은 파트너의 수면을 방해하지 않으며, 청각장애인도 사용할 수 있는 포용적 기술입니다. 또한 AI가 분석한 최적 기상 시점(수면 주기 종료 시점)에 진동이 작동하여 수면 관성을 최소화합니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="product">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">온열 자동 조절 기능은 실제로 수면 질 향상에 도움이 되나요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                스탠퍼드 수면 연구센터의 연구에 따르면, 체온 안정화는 뒤척임을 감소시키고 수면 효율을 15-20% 향상시킵니다. SomnusX는 사용자의 체온과 주변 온도를 실시간으로 감지하여 최적의 수면 환경(32-34°C)을 유지합니다. 사용자 테스트 결과, 온열 조절 기능 사용 시 뒤척임이 평균 27% 감소했으며, 수면 만족도가 40% 이상 향상되었습니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 기술 관련 FAQ -->
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="tech">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">SomnusX의 AI 수면 패턴 분석은 얼마나 정확한가요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX는 머신러닝 알고리즘(LSTM 및 CNN)을 활용하여 85-95% 정확도의 수면 단계 분석을 제공합니다. 스탠퍼드 대학 연구를 기반으로 개발된 당사의 AI 시스템은 다중 센서를 통해 수면 중 미세한 움직임, 호흡 패턴 및 체온 변화를 종합적으로 분석합니다. 기존 솔루션들이 단일 지표만 측정하는 것과 달리, SomnusX는 복합적 데이터를 통합 분석하여 REM/NREM 등 수면 단계를 더욱 정확하게 파악합니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="tech">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">경량 설계가 정말 가능한가요? 기존 제품보다 얼마나 작고 가벼운가요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX는 최신 경량 소재 및 소형 센서 기술을 활용하여 기존 제품 대비 30% 가벼운 무게와 25% 작은 부피를 실현했습니다. 고밀도 메모리폼과 모듈형 전자장치 배치를 통해 무게 최적화를 이루었으며, 이는 사용자의 편안함을 저해하지 않는 수준입니다. 외부 테스트 결과, 사용자의 92%가 기존 베개와 비교하여 무게 차이를 느끼지 못했습니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="tech">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">개인정보와 의료 데이터는 어떻게 보호되나요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX는 GDPR 및 HIPAA 기준에 부합하는 엄격한 데이터 보안 시스템을 갖추고 있습니다. 모든 사용자 데이터는 256비트 엔드-투-엔드 암호화로 보호되며, 의료 정보 공유는 명시적 사용자 동의 후에만 이루어집니다. 또한 익명화 처리된 데이터만 연구 및 분석 목적으로 활용하며, 개인정보보호 전문가가 정기적인 보안 감사를 진행합니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- AS 및 관리 관련 FAQ -->
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="after">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">제품의 내구성과 배터리 수명은 어떻게 되나요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX는 평균 5년 이상의 수명을 가지도록 설계되었습니다. 배터리는 한 번 충전으로 최대 7일간 사용 가능하며, 무선 충전 방식을 채택하여 편의성을 높였습니다. 모듈형 설계로 배터리, 센서 등 부품별 교체가 가능하여 제품 전체를 교체할 필요 없이 경제적인 유지보수가 가능합니다. 또한 2년 제품 보증이 기본 제공되며, 구독 모델 이용 시 보증 기간이 연장됩니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="after">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">세척 및 관리는 어떻게 해야 하나요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX의 커버는 분리 가능하며 일반 세탁기에서 30°C 이하로 세척할 수 있습니다. 전자장치가 내장된 본체는 방수 등급 IPX5를 갖추고 있어 물티슈로 표면 청소가 가능합니다. 3개월마다 전용 살균 스프레이를 사용한 소독을 권장하며, 구독자에게는 관리 키트가 정기적으로 발송됩니다. 모바일 앱을 통해 제품 상태 진단 및 관리 알림 서비스도 제공됩니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="after">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">AS 서비스는 어떻게 이용할 수 있나요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                제품 이상 발생 시 모바일 앱의 진단 기능을 통해 1차 점검이 가능합니다. 원격으로 해결되지 않는 문제는 택배 수거 서비스를 통해 무상 수리(보증기간 내)를 제공하며, 수리 기간 동안 임시 대체품을 제공합니다. 24시간 고객센터와 AI 챗봇 상담도 이용 가능하며, 정기적인 펌웨어 업데이트를 통해 제품 성능이 지속적으로 개선됩니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 사업 관련 FAQ -->
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="business">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">월 9,900원의 구독 서비스는 어떤 가치가 있나요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX 구독 서비스는 단순한 수면 데이터 제공을 넘어 종합적인 건강 관리 플랫폼입니다. 구독자에게는 AI 맞춤형 수면 콘텐츠(백색소음, 명상 ASMR), 주간/월간 상세 수면 리포트, 정기적인 AI 기능 업데이트가 제공됩니다. 또한 수면 전문의와의 비대면 상담 할인 혜택이 포함되어 있어, 장기적으로 병원 방문 비용 및 건강 관리 비용 절감 효과가 있습니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="business">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">병원 및 의료기관과 어떻게 협력할 계획인가요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX는 국내 의료법 범위 내에서 수면 전문 병원 및 클리닉과 협력 모델을 구축했습니다. 사용자 동의 하에 분석된 수면 데이터는 협력 의료기관에 안전하게 공유되며, 의료진은 이를 기반으로 효율적인 상담을 제공할 수 있습니다. 이미 서울 소재 3개 수면 클리닉과 파일럿 협력을 진행 중이며, 2026년까지 전국 50개 병원으로 파트너십을 확대할 계획입니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="business">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">FDA 및 CE 인증은 언제 획득할 계획인가요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX는 2027년까지 FDA(미국 식품의약국) 및 CE(유럽 품질 인증) 획득을 목표로 진행 중입니다. 현재 임상 검증 단계를 진행하고 있으며, 2026년 4분기에 인증 신청을 완료할 예정입니다. 이를 위해 글로벌 수면 의학 전문가 및 인증 전문 컨설턴트와 협업하고 있으며, 인증 획득 후 2027년 하반기 미국 및 유럽 시장 진출을 계획하고 있습니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden p-6 cursor-pointer" data-category="business">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold">SomnusX는 어떻게 친환경 가치와 사회적 책임을 실현하나요?</h3>
+                            <button class="faq-toggle w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full text-white">+</button>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-300">
+                            <p class="leading-relaxed">
+                                SomnusX는 제품 설계부터 폐기까지 친환경 가치를 구현합니다. 본체는 생분해성 소재를 50% 이상 사용하며, 모듈형 설계로 부품 교체가 가능해 전자 폐기물 발생을 최소화합니다. 사회적 책임으로는 '모두를 위한 수면' 프로그램을 통해 매출의 2%를 장애인 및 저소득층 대상 수면 건강 지원 사업에 기부하고 있으며, 교대 근무자와 독거노인을 위한 맞춤형 수면 프로그램을 지자체와 협력하여 운영 중입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <p class="text-gray-400 mb-6">원하는 답변을 찾지 못하셨나요?</p>
+                    <a href="#" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-lg font-semibold inline-block">
+                        문의하기
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black text-gray-400 py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Somverse</h3>
+                    <p class="text-sm">AI 기반 스마트 수면 혁신</p>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="../company/index.html" class="hover:text-white transition-colors">회사 소개</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">제품</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../products/index.html" class="hover:text-white transition-colors">스마트 베개</a></li>
+                        <li><a href="../research/index.html" class="hover:text-white transition-colors">연구 & 개발</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">체험</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">MVP 체험</a></li>
+                        <li><a href="../metaverse/index.html" class="hover:text-white transition-colors">메타버스</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">고객지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../광고/index.html" class="hover:text-white transition-colors">광고</a></li>
+                        <li><a href="../qna/index.html" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+                © 2024 Somverse. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ 토글 기능
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // 카테고리 필터링
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 버튼 활성화 상태 변경
+                    categoryBtns.forEach(b => b.classList.remove('active', 'bg-purple-600', 'text-white'));
+                    categoryBtns.forEach(b => b.classList.add('bg-gray-800', 'text-gray-300'));
+                    btn.classList.add('active', 'bg-purple-600', 'text-white');
+                    btn.classList.remove('bg-gray-800', 'text-gray-300');
+                    
+                    const category = btn.getAttribute('data-category');
+                    
+                    // FAQ 항목 필터링
+                    faqItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+    <script src="../chatbot.js"></script>
+</body>
+</html> 

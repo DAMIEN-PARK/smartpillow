@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 소개 - SOMNIVERSE</title>
+    <meta name="description" content="SOMNIVERSE의 혁신적인 제품을 소개합니다.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(to right, #60a5fa, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        :root {
+            --foreground-rgb: 255, 255, 255;
+            --background-start-rgb: 0, 0, 0;
+            --background-end-rgb: 0, 0, 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: rgb(var(--foreground-rgb));
+            background: linear-gradient(
+                to bottom,
+                rgb(var(--background-start-rgb)),
+                rgb(var(--background-end-rgb))
+            );
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+                Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        }
+        
+        /* 스크롤바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(31, 41, 55, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(79, 70, 229, 0.7);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8);
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-black text-white antialiased min-h-screen">
+    <!-- 네비게이션 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="text-xl font-bold text-white">
+                    <a href="../index.html" class="hover:text-blue-400 transition-colors">SOMNIVERSE</a>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:flex space-x-8 mr-8">
+                        <a href="../index.html#company" class="text-gray-300 hover:text-white transition-colors">회사 소개</a>
+                        <a href="../products/index.html" class="text-white font-semibold transition-colors">제품 소개</a>
+                        <a href="../index.html#research" class="text-gray-300 hover:text-white transition-colors">연구 & 개발</a>
+                        <a href="../index.html#metaverse" class="text-gray-300 hover:text-white transition-colors">메타버스</a>
+                        <a href="../광고/index.html" class="text-gray-300 hover:text-white transition-colors">광고</a>
+                        <a href="../qna/index.html" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 text-gray-300 hover:text-white border border-gray-600 rounded-full text-sm transition-colors">로그인</a>
+                        <a href="#" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition-colors">회원가입</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- 헤더 섹션 -->
+        <section class="py-16 bg-gradient-to-b from-blue-900 to-black">
+            <div class="container mx-auto px-4 text-center">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl font-bold mb-4 text-gradient">SOMNIVERSE 스마트 베개</h1>
+                    <p class="text-xl text-gray-400">꿈과 우주의 조화, 혁신적인 수면 솔루션</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 소개 섹션 -->
+        <section class="py-12 bg-black">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto bg-gray-900 bg-opacity-50 rounded-xl p-8 mb-12">
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        SOMNIVERSE 스마트 베개는 첨단 센서 기술과 인공지능을 결합하여 사용자의 수면을 종합적으로 관리하는 혁신적인 수면 솔루션입니다. 뇌파(EEG), 심박, 호흡을 실시간으로 분석하여 정확한 수면 단계를 파악하고, 개인화된 수면 컨설팅을 제공합니다.
+                    </p>
+                </div>
+                
+                <div class="relative h-72 md:h-96 rounded-xl overflow-hidden mb-16">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-30"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center p-8 bg-black bg-opacity-70 rounded-xl">
+                            <div class="text-6xl mb-4">💤</div>
+                            <h2 class="text-3xl font-bold mb-2">수면이 달라집니다</h2>
+                            <p class="text-xl text-gray-300">AI가 관리하는 최적의 수면 경험</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 주요 기능 섹션 -->
+                <div class="mb-16">
+                    <h2 class="text-3xl font-bold mb-10 text-center">주요 기능</h2>
+                    
+                    <div class="grid grid-cols-1 gap-12">
+                        <!-- 기능 1 -->
+                        <div class="feature-card bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden">
+                            <div class="p-8">
+                                <h3 class="text-2xl font-bold mb-4">정밀한 수면 모니터링</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    고급 센서 시스템이 수면 상태를 실시간으로 추적합니다. 움직임 감지 자이로센서, 심박 및 호흡센서, 뇌파(EEG) 센서를 통해 수면 단계(얕은잠, 깊은잠, REM)를 정확하게 분석합니다.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 기능 2 -->
+                        <div class="feature-card bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden">
+                            <div class="p-8">
+                                <h3 class="text-2xl font-bold mb-4">AI 맞춤형 수면 코칭</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    SOMNIVERSE만의 AI 코치가 수면 데이터를 분석하여 개인화된 개선 방안을 제시합니다. 매일 아침 지난 밤의 수면 리포트를 제공하고, 수면 패턴에 기반한 실천 가능한 조언을 드립니다. 수면 위생 개선을 위한 구체적인 행동요령과 맞춤형 솔루션으로 장기적인 수면 습관 향상을 도와드립니다.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 기능 3 -->
+                        <div class="feature-card bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden">
+                            <div class="p-8">
+                                <h3 class="text-2xl font-bold mb-4">스마트 알람 시스템</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    현재 수면 단계를 감지하여 최적의 시점에 자연스러운 기상을 유도합니다. 깊은 수면 단계에서는 외부 자극을 최소화하고, 얕은 잠 단계에서 기상 시간이 가까워지면 점진적으로 빛과 소리를 조절하여 상쾌한 아침을 맞이할 수 있도록 도와드립니다.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 기능 4 -->
+                        <div class="feature-card bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden">
+                            <div class="p-8">
+                                <h3 class="text-2xl font-bold mb-4">IoT 스마트홈 연동</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    SOMNIVERSE가 중앙 허브가 되어 주변 스마트 기기를 자동으로 제어합니다. 수면 단계에 맞춰 조명 밝기와 색온도를 조절하고, 최적의 실내 온도와 공기질을 유지합니다. 한 번의 설정으로 모든 기기가 수면 상태에 맞춰 실시간으로 반응하여 최상의 수면 환경을 조성합니다.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 기능 5 -->
+                        <div class="feature-card bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden">
+                            <div class="p-8">
+                                <h3 class="text-2xl font-bold mb-4">VR/AR 몰입형 수면 환경</h3>
+                                <p class="text-gray-300 leading-relaxed">
+                                    취침 전 긴장 완화를 위한 VR 수면 명상 프로그램과 AR 휴식 모드를 제공합니다. 가상의 평화로운 환경에서 호흡법을 안내받으며 심신을 이완시키고, 개인 맞춤형 콘텐츠로 수면 준비를 도와드립니다.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 기능 6 -->
+                        <div class="feature-card bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+                                <div>
+                                    <h3 class="text-2xl font-bold mb-4">편리한 데이터 시각화</h3>
+                                    <p class="text-gray-300 leading-relaxed mb-6">
+                                        SOMNIVERSE 앱에서 주간/월간 수면 패턴을 한눈에 확인할 수 있습니다. 수면 점수, 수면 단계별 비율, 코골이, 뒤척임 등 다양한 데이터를 직관적인 차트로 제공하고, 유사 사용자군과의 비교 분석으로 객관적인 평가가 가능합니다.
+                                    </p>
+                                </div>
+                                <div class="relative rounded-lg overflow-hidden bg-gray-900 flex items-center justify-center">
+                                    <video class="w-full h-auto" autoplay loop muted playsinline>
+                                        <source src="../mov/ui.mp4" type="video/mp4">
+                                        브라우저가 비디오를 지원하지 않습니다.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 차별점 섹션 -->
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gradient-to-r from-blue-900 to-purple-900 rounded-xl p-8">
+                        <h2 class="text-2xl font-bold mb-4">SOMNIVERSE의 차별점</h2>
+                        <p class="text-lg leading-relaxed">
+                            SOMNIVERSE는 단순한 수면 추적기를 넘어 개인 수면 코치 역할을 수행합니다. 정밀한 데이터 수집, 인공지능 분석, 스마트홈 연동, 몰입형 기술이 결합되어 종합적인 수면 솔루션을 제공합니다. 시간이 지날수록 더 정교해지는 AI 알고리즘으로 사용자별 초개인화된 수면 관리를 경험해보세요.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- CTA 섹션 -->
+                <div class="mt-16 text-center">
+                    <a href="#" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-lg font-semibold inline-block hover:opacity-90 transition-opacity">
+                        지금 바로 체험하기
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black text-gray-400 py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">SOMNIVERSE</h3>
+                    <p class="text-sm">AI 기반 스마트 수면 혁신</p>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="../index.html#company" class="hover:text-white transition-colors">회사 소개</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">제품</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../products/index.html" class="hover:text-white transition-colors">스마트 베개</a></li>
+                        <li><a href="../index.html#research" class="hover:text-white transition-colors">연구 & 개발</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">체험</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">MVP 체험</a></li>
+                        <li><a href="../index.html#metaverse" class="hover:text-white transition-colors">메타버스</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">고객지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../광고/index.html" class="hover:text-white transition-colors">광고</a></li>
+                        <li><a href="../qna/index.html" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+                © 2024 SOMNIVERSE. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 스크롤 애니메이션
+        document.addEventListener('DOMContentLoaded', () => {
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+
+    <script src="../chatbot.js"></script>
+</body>
+</html> 

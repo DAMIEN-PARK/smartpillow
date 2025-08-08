@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - SOMNIVERSE</title>
+    <meta name="description" content="SOMNIVERSE 로그인 페이지">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(to right, #60a5fa, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        :root {
+            --foreground-rgb: 255, 255, 255;
+            --background-start-rgb: 0, 0, 0;
+            --background-end-rgb: 0, 0, 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: rgb(var(--foreground-rgb));
+            background: linear-gradient(
+                to bottom,
+                rgb(var(--background-start-rgb)),
+                rgb(var(--background-end-rgb))
+            );
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+                Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        }
+        
+        /* 스크롤바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(31, 41, 55, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(79, 70, 229, 0.7);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8);
+        }
+
+        /* 입력 필드 포커스 효과 */
+        .form-input:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-black text-white antialiased min-h-screen">
+    <!-- 네비게이션 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="text-xl font-bold text-white">SOMNIVERSE</a>
+                <div class="flex items-center">
+                    <div class="hidden md:flex space-x-8 mr-8">
+                        <a href="../company/index.html" class="text-gray-300 hover:text-white transition-colors">회사 소개</a>
+                        <a href="../products/index.html" class="text-gray-300 hover:text-white transition-colors">제품 소개</a>
+                        <a href="../research/index.html" class="text-gray-300 hover:text-white transition-colors">연구 & 개발</a>
+                        <a href="../metaverse/index.html" class="text-gray-300 hover:text-white transition-colors">메타버스</a>
+                        <a href="../광고/index.html" class="text-gray-300 hover:text-white transition-colors">광고</a>
+                        <a href="../qna/index.html" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="../login/index.html" class="px-4 py-2 text-white border border-blue-600 rounded-full text-sm transition-colors">로그인</a>
+                        <a href="../signup/index.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold transition-colors">회원가입</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20 flex justify-center items-center min-h-screen">
+        <div class="w-full max-w-md mx-auto px-6">
+            <div class="bg-gray-900 bg-opacity-70 rounded-2xl shadow-xl p-8 backdrop-filter backdrop-blur-sm">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-gradient mb-2">로그인</h1>
+                    <p class="text-gray-400">SOMNIVERSE에 오신 것을 환영합니다</p>
+                </div>
+                
+                <form>
+                    <div class="mb-6">
+                        <label for="user-id" class="block text-sm font-medium text-gray-300 mb-2">아이디</label>
+                        <input 
+                            type="text" 
+                            id="user-id" 
+                            class="form-input w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-white focus:outline-none" 
+                            placeholder="아이디를 입력하세요"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="user-password" class="block text-sm font-medium text-gray-300 mb-2">비밀번호</label>
+                        <input 
+                            type="password" 
+                            id="user-password" 
+                            class="form-input w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-white focus:outline-none" 
+                            placeholder="비밀번호를 입력하세요"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember-me" class="h-4 w-4 bg-gray-800 border-gray-700 rounded">
+                            <label for="remember-me" class="ml-2 text-sm text-gray-300">로그인 상태 유지</label>
+                        </div>
+                        <a href="#" class="text-sm text-blue-400 hover:text-blue-300">비밀번호 찾기</a>
+                    </div>
+                    
+                    <button 
+                        type="submit" 
+                        class="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 text-white font-medium rounded-lg transition-all"
+                    >
+                        로그인
+                    </button>
+                </form>
+                
+                <div class="mt-8 text-center">
+                    <p class="text-gray-400">계정이 없으신가요? <a href="../signup/index.html" class="text-blue-400 hover:text-blue-300">회원가입</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black text-gray-400 py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">SOMNIVERSE</h3>
+                    <p class="text-sm">AI 기반 스마트 수면 혁신</p>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="../company/index.html" class="hover:text-white transition-colors">회사 소개</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">제품</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../products/index.html" class="hover:text-white transition-colors">스마트 베개</a></li>
+                        <li><a href="../research/index.html" class="hover:text-white transition-colors">연구 & 개발</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">체험</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">MVP 체험</a></li>
+                        <li><a href="../metaverse/index.html" class="hover:text-white transition-colors">메타버스</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-4">고객지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../광고/index.html" class="hover:text-white transition-colors">광고</a></li>
+                        <li><a href="../qna/index.html" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+                © 2024 SOMNIVERSE. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ... existing JavaScript code ...
+    </script>
+
+    <script src="../chatbot.js"></script>
+</body>
+</html> 
